@@ -6,6 +6,7 @@ import (
 	"github.com/cloudwego/eino-ext/components/embedding/ark"
 	"log"
 	"math"
+	"os"
 )
 
 func main() {
@@ -13,8 +14,9 @@ func main() {
 
 	//创建向量模型
 	embedder, err := ark.NewEmbedder(ctx, &ark.EmbeddingConfig{
-		APIKey: "bbc9e3f7-8e13-400c-9c78-ba3944e4762a",
-		Model:  "doubao-embedding-vision-250328",
+		BaseURL: "https://ark.cn-beijing.volces.com/api/v3/embeddings/multimodal",
+		APIKey:  os.Getenv("ARK_KEY"),
+		Model:   os.Getenv("ARK_EMBEDDING_MODEL"),
 	})
 	if err != nil {
 		log.Fatalf("failed to create embedder: %v", err)
